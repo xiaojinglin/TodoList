@@ -34,6 +34,7 @@ namespace TodoList
             if (resultTodo == null)
             {
                 MyTodoList.Add(todo);
+                Console.WriteLine("You just successfully added a new todo.");
             }
             else
             {
@@ -44,10 +45,10 @@ namespace TodoList
         //Delete a todo item
         public void deleteTodo(int index)
         {
-            if (this.MyTodoList.Count > index)
+            if (this.MyTodoList.Count > index -1)
             {
                 MyTodoList.RemoveAt(index-1);
-                Console.WriteLine("Delete sucessfully!");
+                Console.WriteLine("You just successfully deleted a new todo!");
             }
             else
             {
