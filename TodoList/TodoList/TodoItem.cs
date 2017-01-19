@@ -12,6 +12,7 @@ namespace TodoList
         public DateTime DueDate { get; set; }
         public DateTime DateFinished { get; set; }
 
+        //Show todo information
         public void showItem()
         {
             Console.WriteLine(this.Description +

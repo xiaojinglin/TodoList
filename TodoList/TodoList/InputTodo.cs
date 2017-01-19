@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TodoList
 {
+    //A class that store a todo item from the entry
     class InputTodo
     {
         public TodoItem getTodo()
@@ -16,42 +17,37 @@ namespace TodoList
                 string input = "";
                 Console.WriteLine("Please enter the description: ");
                 input = Console.ReadLine();
-                //if (string.IsNullOrEmpty(input))
-                //{
-                //    throw new IsNullOrEmptyException("You didn't .");
-                //}
+                if(string.IsNullOrEmpty(input))
+                {
+                    throw new IsNullOrEmptyException("You can't leave your description empty.");
+                }
                 newTodo.Description = input;
                 Console.WriteLine("Please enter the due date(yyyymmdd): ");
                 input = Console.ReadLine();
-                //DateTime.ParseExact(input, "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture); 
                 newTodo.DueDate = new StringDateSwitch().stringToDate(input);
                 Console.WriteLine("Please enter the finish date(yyyymmdd): ");
                 input = Console.ReadLine();
-                //DateTime.ParseExact(input, "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture);
                 newTodo.DateFinished = new StringDateSwitch().stringToDate(input);                
+            }
+            catch(IsNullOrEmptyException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             catch (FormatException)
             {
                 Console.WriteLine("The data you enter is invalid!");
             }
             return newTodo;
-        }
-        
+        }       
     }
 
-    //class IsNullOrEmptyException: System.Exception
-    //{
-    //    public IsNullOrEmptyException()
-
-    //    {
-
-    //    }
-
-    //    public IsNullOrEmptyException(string message) : base(message)
-
-    //    {
-
-    //    }
-
-    //}
+    class IsNullOrEmptyException : System.Exception
+    {
+        public IsNullOrEmptyException()
+        {
+        }
+        public IsNullOrEmptyException(string message) : base(message)
+        {
+        }
+    }
 }

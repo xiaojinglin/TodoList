@@ -10,6 +10,7 @@ namespace TodoList
     {
         public List<TodoItem> MyTodoList { get; set; }
 
+        //Show the todo list
         public void showList()
         {
             for(int index = 0; index< MyTodoList.Count; index++)
@@ -19,9 +20,18 @@ namespace TodoList
             }
         }
 
+        //Add a new todo item
         public void addTodo(TodoItem todo)
         {
-            if(this.findOne(todo) == null)
+            //Check whether the todo we want to add to the list is a duplicated one
+            TodoItem resultTodo = MyTodoList.Find(
+                  delegate (TodoItem t)
+                  {
+                      return t.Description.Replace(" ", "").ToLower() == todo.Description.Replace(" ", "").ToLower() &&
+                             t.DueDate == todo.DueDate &&
+                             t.DateFinished == todo.DateFinished;
+                  });
+            if (resultTodo == null)
             {
                 MyTodoList.Add(todo);
             }
@@ -31,6 +41,7 @@ namespace TodoList
             }
         }
 
+        //Delete a todo item
         public void deleteTodo(int index)
         {
             if (this.MyTodoList.Count > index)
@@ -42,20 +53,9 @@ namespace TodoList
             {
                 Console.WriteLine("Can't find the todo item!");
             }
-        }
+        }   
 
-        public TodoItem findOne (TodoItem todo)
-        {
-            TodoItem resultTodo = MyTodoList.Find(
-               delegate (TodoItem t)
-               {
-                   return t.Description == todo.Description &&
-                          t.DueDate == todo.DueDate &&
-                          t.DateFinished == todo.DateFinished;
-               });
-            return resultTodo;
-        }
-
+        //Search todo items
         public void searchTodo(DateTime date)
         {
             int count = 0;

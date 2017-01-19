@@ -10,15 +10,15 @@ namespace TodoList
     {
         static void Main(string[] args)
         {
-            List<TodoItem> list = new List<TodoItem>
+            //Creat a todo list and initializate it 
+            Todos todos = new Todos();
+            todos.MyTodoList = new List<TodoItem>
             {
                 new TodoItem() { Description = "Shopping" , DueDate = new DateTime(2017,01,12), DateFinished = new DateTime(2017,01,11)},
                 new TodoItem() { Description = "Clean the house" , DueDate = new DateTime(2017,01,14), DateFinished = new DateTime(2017,01,14)},
                 new TodoItem() { Description = "Fix the door" , DueDate = new DateTime(2017,01,15), DateFinished = new DateTime(2017,01,14)},
                 new TodoItem() { Description = "Change the table" , DueDate = new DateTime(2017,01,12), DateFinished = new DateTime(2017,01,15)}
             };
-
-            Todos todos = new Todos(){ MyTodoList = list };
 
             string entry = "";
             while (true)
@@ -37,12 +37,14 @@ namespace TodoList
                 TodoItem newTodo = new TodoItem();
                 string input = "";
 
-
                 switch (entry)
                 {
+                    //Show list
                     case "1":
                         todos.showList();
                         break;
+
+                   //Add todo to the list
                     case "2":
                         newTodo = new InputTodo().getTodo();
                         if (newTodo != null)
@@ -50,6 +52,8 @@ namespace TodoList
                             todos.addTodo(newTodo);
                         }
                         break;
+
+                    //Search todos
                     case "3":
                         try
                         {
@@ -62,6 +66,8 @@ namespace TodoList
                             Console.WriteLine("The data you enter is invalid!");
                         }
                         break;
+
+                    //Delete todo item
                     case "4":
                         Console.WriteLine("Please enter the item number you want to delete:");
                         input = Console.ReadLine();
@@ -77,6 +83,8 @@ namespace TodoList
                             }
                         }
                         break;
+
+                    //Quit the system
                     case "5":
                         Console.WriteLine("GoodBye");
                         break;
@@ -88,27 +96,6 @@ namespace TodoList
                 {
                     break;
                 }
-
-                ////Enter 5 to exit the program
-                //if (entry == "5")
-                //{
-                //    Console.WriteLine("GoodBye");
-                //    break;
-                //}
-                ////Enter 1 to view the Todo list
-                //else if (entry == "1")
-                //{
-                //    todos.showList();
-                //}
-                //else if (entry == "2")
-                //{
-                //    TodoItem newTodo = new InputTodo().getTodo();
-                //    if(newTodo != null)
-                //    {
-                //        todos.addTodo(newTodo);
-                //    }
-                //}
-
             }
 
         }
